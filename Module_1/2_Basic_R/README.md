@@ -6,7 +6,7 @@ Here we are going to discuss some basic notions of R, mostly in order to underst
 
 Note that in each file there is an assignment that must be completed.
 
-The `Python` discussion will be d
+The `Python` discussion will take place when we start using it. 
 
 
 Rodrigo Esteves de Lima Lopes \
