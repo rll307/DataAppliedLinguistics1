@@ -1,6 +1,6 @@
 # Basic Notions
 
-Here we are going to discuss some basic notions of R, mostly in order to understand some basic syntax and the  IDEs.
+Here we are going to discuss some basic notions of R, mostly in order to understand some basic syntax and the IDEs.
 
 - *.R files are R scripts, you can run them in your IDE
 
