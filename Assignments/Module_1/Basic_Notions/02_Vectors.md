@@ -13,6 +13,6 @@ Rodrigo Esteves de Lima Lopes \
 1. Name your numeric vectors, using the proper command
 1. Make a series of operations with your numeric vectors:
     - Sum them and save to a new variable
-    - Subtract them and and save to a new variable
+    - Subtract them and save to a new variable
     - Use the two first vectors in a Exponentiation (squared or cubed) and save the result in two new variables
 1. Post your results to Google Classroom in a text file so everyone can see
