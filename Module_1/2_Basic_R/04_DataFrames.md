@@ -343,19 +343,18 @@ Then join them:
 ```r
 cbind(my.data.frame,Country)
 ```
-       Names  Birthdays Gender Life.Status Possible.Age Birthplace Country
-1   Astolfo 1907-06-22   male       FALSE          118         SP  Brasil
-2 Eleutério 1987-07-12   male        TRUE           38         SP  Brasil
-3   Alarico 1941-11-10   male       FALSE           84         SP  Brasil
-4   Genésia 1940-11-15 female        TRUE           85         SP  Brasil
-5  Gioconda 1910-07-03 female       FALSE          115         SP  Brasil
-6    Ondina 1982-06-21 female        TRUE           43         SP  Brasil
-7 Esmeralda 1930-10-24 female        TRUE           95         RJ  Brasil
-```
-For more complex data frame operations, please, see the next tutorials. 
 
+| Names 		     | Birthdays 		  | Gender 		 | Life.Status 		 | Possible.Age 		 | Birthplace 		 | Country 		 |
+|------------|-------------|---------|--------------|---------------|-------------|----------|
+| Astolfo 		   | 1907-06-22 		 | male 		   | FALSE 		       | 118 		          | SP 		         | Brasil 		  |
+| Eleutério 		 | 1987-07-12 		 | male 		   | TRUE 		        | 38 		           | SP 		         | Brasil 		  |
+| Alarico 		   | 1941-11-10 		 | male 		   | FALSE 		       | 84 		           | SP 		         | Brasil 		  |
+| Genésia 		   | 1940-11-15 		 | female 		 | TRUE 		        | 85 		           | SP 		         | Brasil 		  |
+| Gioconda 		  | 1910-07-03 		 | female 		 | FALSE 		       | 115 		          | SP 		         | Brasil 		  |
+| Ondina 		    | 1982-06-21 		 | female 		 | TRUE 		        | 43 		           | SP 		         | Brasil 		  |
+| Esmeralda 		 | 1930-10-24 		 | female 		 | TRUE 		        | 95 		           | RJ 		         | Brasil 		  |
 
-
+For more complex data frame operations, please, see the next tutorials.
 
 
 
