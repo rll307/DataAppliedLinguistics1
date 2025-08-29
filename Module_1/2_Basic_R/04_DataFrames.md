@@ -247,8 +247,8 @@ Combining two subsets
 
 
 ```r
-older.women <- subset(my.data.frame, Gender == "female" & Possible.Age > 50)
-older.women
+women.b <- subset(my.data.frame, Gender == "female" & Possible.Age > 50)
+women.b
 
 ##      Names  Birthdays Gender Life.Status Possible.Age
 ## 4  Genésia 1940-11-15 female        TRUE           84
