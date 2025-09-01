@@ -197,7 +197,7 @@ head(M.1)
 
 A couple of things must be observed regarding this `M.1`:
 
-1.  There is a lot of empty lines and double spaces
+1.  There are a lot of empty lines and double spaces
 2.  There is a lot of extra information at `M.1`'s the begging and the
     end
 3.  There is some variation on caps (capital and not capital)
@@ -205,16 +205,16 @@ A couple of things must be observed regarding this `M.1`:
 For our exercise today: 1. We do not need this extra information - Our
 first analysis is going to focus on the main book 1. We do not need
 extra lines 1. We are not going to consider the difference between
-capital and small letters
+capital and small letters.
 
-First we will transform the text in a character vector, for stracting
+First we will transform the text in a character vector, for extracting
 the data
 
 ``` {.r}
 M.1 <- M.1$text
 ```
 
-we will find the beginning of the book. Usually it is on chapter 1:
+we will find the beginning of the book. Usually, it is on chapter 1:
 
 ``` {.r}
 which(M.1== "CAPITULO I")
@@ -241,7 +241,7 @@ which(M.1 == "FIM")
 fim <- which(M.1 == "FIM")
 ```
 
-Such an exercise is possible because Gutenberg project is very
+Such an exercise is possible because Gutemberg project is very
 consistent in terms of file formats. In different contexts, we would
 have to make it manually. Now I will select the data I will work with:
 
@@ -292,7 +292,7 @@ not.blanks <- which(M1.l.v!="")
 M1.l.v <- M1.l.v[not.blanks] 
 ```
 
-Now we are going to use some of the indexes to find some words:
+Now we are going to use some indexes to find some words:
 
 ``` {.r}
 mypositions.v <- c(400,125,621)
@@ -301,8 +301,7 @@ M1.l.v[mypositions.v]
 
     ## [1] "digo" "na"   "se"
 
-In the first command some random numbers show which are the positions we
-are going to use as a reference. In the second, We use those indexes for
+In the first command, some random numbers show which are the positions we will use as a reference. In the second, We use those indexes for
 data checking. We could easily do:
 
 ``` {.r}
@@ -324,7 +323,7 @@ M1.l.v[c(1,2,3)]
 
     ## [1] "capitulo" "i"        "obito"
 
-I think Marcella is the most strong female character ins his book, let
+I think Marcella is the strongest female character ins his book, let
 us check how many times she is in the book.
 
 ``` {.r}

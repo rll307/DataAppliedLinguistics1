@@ -4,7 +4,7 @@ Rodrigo Esteves de Lima Lopes\
 
 # Project Gutenberg Analysis part 2
 
-## Preliminar notes
+## Preliminary notes
 
 This is notebook is based on the book:
 
@@ -12,7 +12,7 @@ This is notebook is based on the book:
 
 # Comparing books
 
-In this tutorial we will use some books by of *Machado de Assis* available at [Projeto Gutemberg](https://www.gutenberg.org/) in order to create a comparison between the different lexical choices present in each book.
+In this tutorial, we will use some books by of *Machado de Assis* available at [Projeto Gutemberg](https://www.gutenberg.org/) to create a comparison between the different lexical choices present in each book.
 
 ## Loading packages
 
@@ -58,7 +58,7 @@ MA.bruto$title<-"MA"
 
 ## Organising the data
 
-First of all we will join ou books in a single data frame:
+First of all, we will join our books in a single data frame:
 
 ``` {.r}
 machado.bruto <- rbind(MP.bruto,DC.bruto,MA.bruto)

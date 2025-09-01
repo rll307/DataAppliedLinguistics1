@@ -74,7 +74,7 @@ summary(starwars)
 We have pretty long results, but some conclusions might be interesting:
 
 - It is a data frame
-- It has numeric, list and character columns
+- It has numeric, list, and character columns
 - It has only the seven main movies. 
 
 ## Filter
@@ -164,6 +164,7 @@ head(starwars %>%
 ```
 
 ## Rename
+
 Rename help us to change easily the name of a single column
 
 
@@ -186,7 +187,7 @@ head(rename(starwars,character = name))
 
 ## Mutate
 
-`mutate()` allows me to create new columns based on some criteria I need. It draws data from existing columns and executes commands to add a new data column in my data frame. For this command let us use another built in R data frame called `nycflights13`:
+`mutate()` allows me to create new columns based on some criteria I need. It draws data from existing columns and executes commands to add a new data column in my data frame. For this command, let us use another built in R data frame called `nycflights13`:
 
 
 ```r
@@ -257,9 +258,9 @@ mutate(flights, total_delay = arr_delay+dep_delay)%>%
 ## 5         -31
 ## 6           8
 ```
-Notice that here instead of embedding the command, the *pipe* `%>%` was my syntax choice. Initially the the *pipe* `%>%` function was introduced in R by the package `magrittr` which is able to do much much more than just pipening our code.
+Notice that here instead of embedding the command, the *pipe* `%>%` was my syntax choice. Initially,  the *pipe* `%>%` function was introduced in R by the package `magrittr` which can do much more than just pipening our code.
 
-If I want to select more than a column I will have to save it as a variable:
+If I want to select more than a column, I will have to save it as a variable:
 
 
 ```r
