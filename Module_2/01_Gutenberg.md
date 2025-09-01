@@ -15,13 +15,13 @@ all languages. There are packages in R that allow us to do this kind of
 scrapping automatically.
 
 First we will download and install
-[**gutenbergr**](https://github.com/ropensci/gutenbergr) and a few
+[**Gutenberg**](https://github.com/ropensci/gutenbergr) and a few
 others. There are two ways to do this, one is by the command line, the
 other is by the Rstudio package administrator. Here I will show both.
 
 ## Checking the packages
 
-First of all we will try to load all packages and see if it throws an
+Firstly, we will load all packages and see if it throws an
 error:
 
 ``` {.r}
