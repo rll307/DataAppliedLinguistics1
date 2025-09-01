@@ -165,7 +165,7 @@ M.1 <- M.0 %>%
 A couple of things about the command above:
 
 -   The pipe "**%\>%**" allows me to use the same variable (M.0) and
-    pass it throw the next command. It help us to save some code. It is
+    pass it throw the next command. It helps us to save some code. It is
     loaded with the *tidy* package.
 
 -   I have a nested set of commands:
