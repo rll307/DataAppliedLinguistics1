@@ -45,7 +45,7 @@ If you do not have one of these, please install them using common package instal
 library(tidyverse)      # Data manipulation
 library(stringr)        # Regular expressions and text cleaning
 library(tidytext)       # Text mining 
-library(harrypotter textdata) 
+library(harrypotter) 
 library(textdata)   # Our data
 ```
 
