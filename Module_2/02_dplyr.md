@@ -295,7 +295,7 @@ So, from now on I will be using `%>%` or `|>` interchangeably.
 
 ## Arrange and filter
 
-To discuss arrange and filter I will get back to our previous Gutenberg project data frame:
+To discuss arrange and filter, I will get back to our previous Gutenberg project data frame:
 
 
 ```r

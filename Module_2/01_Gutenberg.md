@@ -407,17 +407,7 @@ Let us check which are the most frequent words? Now without grammatical
 words? - We will need to load a stopwords list to help us.
 
 ``` {.r}
-library(readr)
-my.stopwords <- read_csv("stop_port2.csv", col_names = FALSE)
-```
-
-    ## Parsed with column specification:
-    ## cols(
-    ##   X1 = col_character()
-    ## )
-
-``` {.r}
-colnames(my.stopwords)<-"word"
+my.stopwords <- data.frame(word = stopwords::stopwords("pt"))
 ```
 
 ``` {.r}
