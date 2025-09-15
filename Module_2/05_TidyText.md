@@ -28,6 +28,7 @@ library(dplyr)
 library(tidyverse)
 library(tidyr)
 library(stringr)
+ install_github("trinker/textreadr")
 ```
 
 Each of these packages has a specific function:
