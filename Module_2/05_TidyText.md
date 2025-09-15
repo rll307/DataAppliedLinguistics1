@@ -8,7 +8,7 @@ TidyText: Reviewing in a set of Clarisse Lispector Novels
 
 ## Purpose of this notebook
 
-I am going to discuss some strategies of comparison between texts. It was produced in order to assist colleagues who work in the area of Corpus Linguistics and Systemic Functional Linguistics, as a way to use R in their research. It is part of my CNPq-funded project and seeks to make corpus tools and network analysis accessible. If you have any doubts or wish to make any research contact please send me an email.
+I am going to discuss some strategies of comparison between texts. It was produced to assist colleagues who work in the area of Corpus Linguistics and Systemic Functional Linguistics, as a way to use R in their research. It is part of my CNPq-funded project and seeks to make corpus tools and network analysis accessible. If you have any doubts or wish to make any research contact please send me an email.
 
 This document is based mostly in the package [Tidytext](https://www.rdocumentation.org/packages/tidytext/versions/0.2.1) and in the following book:
 
@@ -28,7 +28,9 @@ library(dplyr)
 library(tidyverse)
 library(tidyr)
 library(stringr)
- install_github("trinker/textreadr")
+install_github("trinker/textreadr")
+install.packages("textclean")
+install.packages("abjutils")
 ```
 
 Each of these packages has a specific function:
@@ -100,11 +102,11 @@ paixao <- textreadr::read_document("paixao.txt")
 
 ## Cleaning data
 
-Our first step is going to clean our textual data. For this study we will:
+Our first step will clean our textual data. For this study, we will:
 
 1.  Remove diacritics
 
--   This is not always necessary, it will depend of our objectives
+-   This is not always necessary, it will depend on our objectives
 
 1.  Replace possible `HTML` codes
 2.  Change words to lower case
@@ -121,178 +123,75 @@ source("05_TidyText_functions.R")
 
 ## Create and compare a wordlist
 
-Our fist step will be processing the two novels in a set of words with their frequencies.
-
-``` {.r}
-estrela <- data.frame(text = estrela, stringsAsFactors = F)
-```
-
-``` {.r}
-paixao.tidy <- analise.paixao  |>
-  unnest_tokens(word, text) |>
-  anti_join(My.Stopwords, by = "word")
-```
-
-``` {.r}
-paixao <- data.frame(text = paixao, stringsAsFactors = F)
-```
-
-``` {.r}
-paixao.tidy <- paixao  |>
-  unnest_tokens(word, text) |>
-  anti_join(My.Stopwords, by = "word")
-```
-
-The code above creates a data frame from each novel. It is important to make the files processable by R. Our next step is to apply our customised function (`Clean_String`) to the files. Note that we keep the data frame format.
+Our first step will be processing the two novels in a set of words with their frequencies.
 
 ``` {.r}
 analise.paixao <- Clean_String(paixao$text) |>
   data.frame()
 colnames(analise.paixao) <- 'text'
 
+paixao.tidy <- analise.paixao   |>
+  unnest_tokens(word, text) |>
+  anti_join(My.Stopwords, by = "word")
+
 analise.estrela <- Clean_String(estrela$text) |>
   data.frame()
 colnames(analise.estrela) <- 'text'
-```
 
-Now our next step is prepare the wordlist. The following lines process the data frame in order to:
-
--   Make it in a word per line forma
-
--   Filter stop-words out
-
--   Count and present the wordlist
-
-``` {.r}
-paixao.tidy <- analise.paixao  |>
+estrela.tidy <- analise.estrela  |>
   unnest_tokens(word, text) |>
   anti_join(My.Stopwords, by = "word")
-
-estrela.tidy <- analise.estrela |>
-  unnest_tokens(word, text) |>
-  anti_join(My.Stopwords, by = "word")
-head(paixao.tidy)
 ```
+The code above creates a data frame from each novel. It is important to make the files processable by R. It also applies our customised function (`Clean_String`) to the files. Note that we keep the data frame format. This code also creates a wordlist and filters the stopword lists.
 
-    ##         word
-    ## 1 procurando
-    ## 2 procurando
-    ## 3   tentando
-    ## 4   entender
-    ## 5   tentando
-    ## 6     alguem
-
-``` {.r}
-head(estrela.tidy)
-```
-
-    ##        word
-    ## 1   verdade
-    ## 2   clarice
-    ## 3 lispector
-    ## 4    dedico
-    ## 5        ai
-    ## 6    antigo
-
-As we can see, there is a column which displays a sequential number, representing the line of the list, and another which displays the words itself. However it is also possible to observe that *procurando* is present twice in the list. It happens because we are not counting occurrences, but only displaying the novel's words.
+As we can see, there is a column which displays a sequential number, representing the line of the list, and another which displays the words itself. However, it is also possible to observe that *procurando* is present twice in the list. It happens because we are not counting occurrences, but only displaying the novel's words.
 
 ``` {.r}
 paixao.l<- paixao.tidy |>
   count(word, sort = TRUE)
-```
 
-``` {.r}
 esterla.l <- estrela.tidy |>
   count(word, sort = TRUE)
 ```
 
 The code above transforms these lists in something similar to a word list. The first line creates the file itself, which I chose to name with the suffix "\*.l". The operator " \|\>" is part of the tidyverse, its function is to help us to "pass" one line of code through to the other and perform more than a command at once. The following code counts the words and creates a new column with the results.
 
-``` {.r}
-head(paixao.l, 10)
-```
-
-    ##      word   n
-    ## 1     mim 227
-    ## 2      so 195
-    ## 3    vida 190
-    ## 4      ja 185
-    ## 5  barata 180
-    ## 6     tao 131
-    ## 7    amor 111
-    ## 8    medo  87
-    ## 9   mundo  87
-    ## 10    ate  86
-
-``` {.r}
-head(esterla.l, 10)
-```
-
-    ##        word  n
-    ## 1        so 96
-    ## 2   macabea 91
-    ## 3      vida 83
-    ## 4      voce 79
-    ## 5       ate 67
-    ## 6        ja 60
-    ## 7      moca 52
-    ## 8  historia 51
-    ## 9       tao 49
-    ## 10      mim 48
-
 Our next step is to build a table comparing the frequency of such words. It is necessary in order to generate the visualisations and make the analysis possible. In the first line we create a new object and add two columns in it, one for each book, and make sure that the list of words identify to the book where it is from. I the following line we clear the text, keeping only alphabetical words and deleting numbers and special symbols. We group the words by book (*livro* in Portuguese) and calculate the relative proportion of the words within each novel. Since absolute values do not mean much, we delete them.
 
 ``` {.r}
-frequencia.clarisse <- bind_rows(mutate(paixao.tidy, livro = "P"),
-                                 mutate(estrela.tidy, livro = "H"))  |>
-  mutate(word = str_extract(word, "[a-z']+"))  |>
-  count(livro, word)  |>
-  group_by(livro)  |>
-  mutate(proportion = (n / sum(n))*100)  |>
-  select(-n)  |>
+frequencia.clarisse <- bind_rows(
+  mutate(paixao.tidy, livro = "P"),
+  mutate(estrela.tidy, livro = "H")
+) |>
+  mutate(word = str_extract(word, "[a-z']+")) |>
+  count(livro, word) |>
+  group_by(livro) |>
+  mutate(proportion = (n / sum(n)) * 100) |>
+  select(-n) |>
   spread(livro, proportion)
-head(frequencia.clarisse)
 ```
-
-    ## # A tibble: 6 x 3
-    ##   word            H        P
-    ##   <chr>       <dbl>    <dbl>
-    ## 1 aaaar      0.0111 NA      
-    ## 2 abafada    0.0111 NA      
-    ## 3 abafado   NA       0.00591
-    ## 4 abafar    NA       0.00591
-    ## 5 abafavaa   0.0111 NA      
-    ## 6 abaixando NA       0.0118
-
-It was possible to observe that the word **aaaar** is present in the top of the list. If we want to clean it out, we have to add it to our stop wordlist:
-
-``` {.r}
-My.Stopwords <- data.frame(word = c(My.Stopwords$word,"aaaar"))
-```
-
-Then we rerun the four pieces of code above.
 
 ### Visualising our wordlist
 
 Now it is time to compare the Lexis in the two books. We will do so by using a ggplot command. Mostly we are putting both novels side by side, making them overlap. The position is calculated my a log scale that helps to represent the overlapping. The more central a word is in the graphic, the less "specific" of a book it is.
 
 ``` {.r}
-ggplot(frequencia.clarisse, aes(x = H, y = P,
-                                color = abs(H - P))) +
+ggplot(frequencia.clarisse, aes(
+  x = H, y = P,
+  color = abs(H - P)
+)) +
   geom_abline(color = "gray40", lty = 2) +
-  geom_jitter(alpha = 0.1, size = 2.5, width = 0.3, height = 0.3) + 
-  geom_text(aes(label = word), check_overlap = TRUE, vjust = 1.5) + 
+  geom_jitter(alpha = 0.1, size = 2.5, width = 0.3, height = 0.3) +
+  geom_text(aes(label = word), check_overlap = TRUE, vjust = 1.5) +
   scale_x_log10(labels = scales::percent_format()) +
-  scale_y_log10(labels = scales::percent_format()) + 
-  scale_color_gradient(limits = c(0, 0.001),
-                       low = "darkslategray4", high = "gray75") +
-  theme(legend.position = "none") + 
+  scale_y_log10(labels = scales::percent_format()) +
+  scale_color_gradient(
+    limits = c(0, 0.001),
+    low = "darkslategray4", high = "gray75"
+  ) +
+  theme(legend.position = "none") +
   labs(y = "Paixão segundo GH", x = "Hora da Estrela")
 ```
-
-    ## Warning: Removed 6253 rows containing missing values (geom_point).
-
-    ## Warning: Removed 6253 rows containing missing values (geom_text).
 
 ![Comparison](images/tt01.png)
 
@@ -309,16 +208,7 @@ clarisse.livros <- rbind(analise.estrela,analise.paixao)
 clarisse.livros$book <- as.factor(clarisse.livros$book)
 head(clarisse.livros)
 ```
-
-    ##                                                   text            book
-    ## 1                         na verdade clarice lispector Hora da Estrela
-    ## 2   pois que dedico esta coisa ai ao antigo schumann e Hora da Estrela
-    ## 3          sua doce clara que sao hoje ossos ai de nos Hora da Estrela
-    ## 4      dedicome a cor rubra muito escarlate como o meu Hora da Estrela
-    ## 5 sangue de homem em plena idade e portanto dedicome a Hora da Estrela
-    ## 6       meu sangue dedicome sobretudo aos gnomos anoes Hora da Estrela
-
-Ou next step is to create the bigrams itself.
+Our next step is to create the bigrams list.
 
 ``` {.r}
 # Creating bigrams
@@ -326,32 +216,11 @@ clarisse.bigrams <- clarisse.livros |>
   unnest_tokens(bigram, text, token = "ngrams", n = 2)
 bigrams.count <- clarisse.bigrams |>
   count(bigram, sort = TRUE)
-head(clarisse.bigrams)
 ```
-
-    ##              book            bigram
-    ## 1 Hora da Estrela        na verdade
-    ## 2 Hora da Estrela   verdade clarice
-    ## 3 Hora da Estrela clarice lispector
-    ## 4 Hora da Estrela          pois que
-    ## 5 Hora da Estrela        que dedico
-    ## 6 Hora da Estrela       dedico esta
-
-``` {.r}
-head(bigrams.count)
-```
-
-    ##    bigram   n
-    ## 1   o que 394
-    ## 2  que eu 269
-    ## 3    <NA> 254
-    ## 4   e que 248
-    ## 5     e o 173
-    ## 6 que nao 165
 
 In the first line, the command `unnest_tokens` creates a column which the bigrams found, taking from the column `text`, the `n=2` tells how long my ngram is supposed to be. In the second line, it creates a data frame telling how many of each are. The command `count` does it for me.
 
-Ou next step is to separate the words, these will be important for our network analysis. Note that the command is separating two columns using a single space as a criterion.
+Our next step is to separate the words, these will be important for our network analysis. Note that the command is separating two columns using a single space as a criterion.
 
 ``` {.r}
 clarisse.separated <- clarisse.bigrams |>
@@ -381,30 +250,7 @@ paixao.count <- clarisse.bigrams |>
   count(bigram, sort = TRUE) |>
   separate(bigram, c("word1", "word2"), sep = " ")
 paixao.count <- paixao.count[-3,]
-
-head(hora.count)
 ```
-
-    ##   word1 word2   n
-    ## 1     o   que 109
-    ## 2     e   que  88
-    ## 4   que   nao  48
-    ## 5   que    se  44
-    ## 6   que     e  42
-    ## 7   que     a  38
-
-``` {.r}
-head(paixao.count)
-```
-
-    ##   word1 word2   n
-    ## 1     o   que 285
-    ## 2   que    eu 240
-    ## 4     e   que 160
-    ## 5     e     o 143
-    ## 6     e     a 139
-    ## 7    eu   nao 123
-
 Now we are going to clean the stopwords and see the difference
 
 ``` {.r}
@@ -413,30 +259,12 @@ clarisse.filtered <- clarisse.separated |>
   filter(!word2 %in% My.Stopwords$word)
 head(clarisse.filtered)
 ```
-
-    ##              book   word1     word2
-    ## 1 Hora da Estrela verdade   clarice
-    ## 2 Hora da Estrela clarice lispector
-    ## 3 Hora da Estrela  antigo  schumann
-    ## 4 Hora da Estrela    doce     clara
-    ## 5 Hora da Estrela   ossos        ai
-    ## 6 Hora da Estrela     cor     rubra
-
 Now we count the filtered bigrams and have a look at it
 
 ``` {.r}
 bigrams.count <- clarisse.filtered |> 
   count(word1, word2, sort = TRUE)
-head(bigrams.count)
 ```
-
-    ##     word1   word2   n
-    ## 1    <NA>    <NA> 254
-    ## 2   algum    modo   8
-    ## 3  madama carlota   8
-    ## 4  coisas     sao   7
-    ## 5 materia    viva   7
-    ## 6 propria    vida   6
 
 ### Going forward
 

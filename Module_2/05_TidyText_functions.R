@@ -8,6 +8,7 @@ Clean_String <- function(text){
   temp <- gsub('[[:digit:]]+', ' ', temp)
   # Lowercase
   temp <- tolower(temp)
+  temp <- abjutils::rm_accent(temp)
   # Remove everything that is not a number or letter). 
   #temp <- stringr::str_replace_all(temp,"[^a-zA-Z\\s]", "")
   # Shrink down to just one white space
