@@ -93,11 +93,8 @@ head(My.Stopwords,10)
 Now we are going to load the novels:
 
 ``` {.r}
-estrela <- textreadr::read_document("estrela.txt")
-```
-
-``` {.r}
-paixao <- textreadr::read_document("paixao.txt")
+estrela <- textreadr::read_document("Dados/estrela.txt") |> data.frame(text = estrela)
+paixao <- textreadr::read_document("Dados/paixao.txt") |> data.frame(text = paixao)
 ```
 
 ## Cleaning data
