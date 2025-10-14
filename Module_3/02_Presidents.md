@@ -78,7 +78,12 @@ similaridade <- textstat_simil(dfm_lula, method = "cosine", margin = "documents"
 matriz_similaridade <- as.matrix(similaridade)
 print(matriz_similaridade)
 ```
+
+
+
 This similarity matrix is even more interesting if we print then. 
+
+
 ```r
 cores_heatmap_2 <- colorRampPalette(brewer.pal(n = 9, name = "Blues"))(50)
 cor_dos_numeros <- ifelse(matriz_similaridade > 0.5, "white", "black")
