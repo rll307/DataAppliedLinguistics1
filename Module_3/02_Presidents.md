@@ -99,11 +99,11 @@ pheatmap(
 ![Similarity](Pictures/Matrix01.png)
 
 And if we compared the similarities of all speeches?
-
+```r
 similaridade <- textstat_simil(Minha.DFM, method = "cosine", margin = "documents")
 matriz_similaridade <- as.matrix(similaridade)
 cores_heatmap <- colorRampPalette(brewer.pal(n = 10, name = "BuPu"))(50)
-```r
+
 pheatmap(
   matriz_similaridade,
   main = "Similaridade e Clusters",
