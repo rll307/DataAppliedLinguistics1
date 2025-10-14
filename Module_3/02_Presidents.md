@@ -82,7 +82,6 @@ This similarity matrix is even more interesting if we print then.
 ```r
 cores_heatmap_2 <- colorRampPalette(brewer.pal(n = 9, name = "Blues"))(50)
 cor_dos_numeros <- ifelse(matriz_similaridade > 0.5, "white", "black")
-
 pheatmap(
   matriz_similaridade,
   main = "Similaridade e Clusters",
@@ -101,13 +100,6 @@ matriz_similaridade <- as.matrix(similaridade)
 cores_heatmap <- colorRampPalette(brewer.pal(n = 10, name = "BuPu"))(50)
 ```r
 pheatmap(
-  matriz_similaridade,
-  main = "Similaridade e Clusters",
-  display_numbers = TRUE,
-  fontsize = 12,
-  color = cores_heatmap,
-  number_color = "black"
-)pheatmap(
   matriz_similaridade,
   main = "Similaridade e Clusters",
   display_numbers = TRUE,
