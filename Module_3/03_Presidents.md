@@ -4,7 +4,7 @@ Rodrigo Esteves de Lima Lopes\
 _Universidade Estadual de Campinas_
 [rll307@unicamp.br](mailto:rll307@unicamp.br)
 
-# Introdução
+# Introduction
 In this script we are going to study the more frequent words of our corpus, comparing their use. 
 
 # Packages
