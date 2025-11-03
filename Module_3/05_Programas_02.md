@@ -157,7 +157,7 @@ vlcex = 0.8
 * `caxislabels = seq(0, 50, 10)` shows axis labels 0, 10, 20, 30, 40, 50. These should match the scale of your topic values. If your proportions range 0..1, consider changing these labels or scaling your data.
 * `vlcex = 0.8` changes the size of the variable label text (the labels around the radar: `Labour`, `Development`, etc.).
 
-### 10) Adding a legend
+### 9) Adding a legend
 
 ```r
 legend(
