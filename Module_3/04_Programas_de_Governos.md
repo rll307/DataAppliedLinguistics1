@@ -24,7 +24,7 @@ devtools::install_github("rll307/BrPoliCorpus")
 | **BrPoliCorpus** | Download political speech corpora from Brazil |
 
 
-## 📥 Data Download
+##  Data Download
 
 The `BrPoliCorpus` package provides direct access to speech datasets.
 
@@ -38,9 +38,9 @@ download_index()
 Brasil_president_2022 <- download_Brasil_president_2022()
 ```
 
-> 🟡 `download_index()` shows all available datasets. Use `View(IndexFunctions)` interactively to explore options.
+>  `download_index()` shows all available datasets. Use `View(IndexFunctions)` interactively to explore options.
 
-## 🧹 Data Preparation
+## Data Preparation
 
 Remove unwanted entries and create a document ID:
 
@@ -142,7 +142,7 @@ mutate_if(is.numeric, ~ round(., 2))
 - `ntype()` counts unique word forms.  
 - The ratio between total types and tokens gives a measure of lexical diversity.
 
-## ✂️ Segmenting the Corpus
+## Segmenting the Corpus
 
 ```r
 My.corpus <- split_segments(presidents, segment_size = 30)
@@ -153,14 +153,14 @@ This allows clustering algorithms like `rainette()` to identify local topic stru
 
 ---
 
-## 🚫 Stopword Handling
+## Stopword Handling
 
 ```r
 MySWL <- stopwords("pt") |> as.data.frame()
 MySWL <- MySWL[-c(25, 28, 29, 31, 35, 42, 54, 58, 76, 79.80, 81:88, 100, 103:121, 147, 148, 149:203, 12), ]
 MySWL <- c(MySWL, "s", "i", "p", "https", "m", "c", "n", "t", "z", "í", "2022", "2023", "2026", "$", "67", "nº", "ptb", "fi", "r", "fi", "ﬁ", "eﬁ", "ﬁ", "ﬂ", "proﬁ")
 ```
-## 🧩 Tokenization
+## Tokenization
 
 ```r
 My.tok <- tokens(
@@ -179,7 +179,7 @@ My.tok <- tokens_remove(My.tok, MySWL, verbose = TRUE)
 - Converts everything to lowercase.  
 - Removes Portuguese stopwords and extra undesired tokens.
 
-## 🧮 DFM Construction and Cleaning
+## DFM Construction and Cleaning
 
 ```r
 dfm.presidents <- dfm(My.tok)
@@ -221,7 +221,7 @@ Explore_groups <- rainette_stats(
 - `rainette_plot()` visualizes the most frequent or discriminant terms in each cluster.
 - `rainette_stats()` provides per-cluster statistics.
 
-## 📊 Plotting
+##  Plotting
 
 - `rainette_plot()` produces a faceted plot of the top words per cluster.
 - `Explore_groups` is a data frame summarizing distinctive words for each group.
