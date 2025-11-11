@@ -23,13 +23,9 @@ Install them in R if necessary, e.g.:
 install.packages(c("dplyr","fmsb","tidyr"))
 ```
 
-> Note: The script references a function `clusters_by_doc_table()` and an object `My.corpus`. These are not base R functions and must come from your our previous scripot (please ensure those objects/functions are available in your environment before running the script).
-
 
 
 ## Analysing the data
-
-Below I explain the purpose and effect of each important block in the script. Where a function is not a base function (for example, `clusters_by_doc_table()`), I explain expected input / output so you can integrate your own objects.
 
 ### 1) Loading libraries
 
@@ -74,7 +70,7 @@ mutate(across(starts_with("clust_"), ~ round(.x, 2)))
 ```
 * `mutate()` combined with `across()` selects every column whose name starts with `clust_` and rounds its values to 2 decimal places.
 
-* This keeps the proportions compact and better for display.
+This keeps the proportions compact and better for display.
 
 ### 5) Renaming the cluster columns to meaningful topic labels
 
@@ -84,7 +80,8 @@ colnames(ClustersDoc)[4] <- "Development"
 colnames(ClustersDoc)[5] <- "Infraestructure"
 colnames(ClustersDoc)[6] <- "Government"
 ```
-* These lines rename the third through sixth column names to readable labels used as radar axes later. Make sure the positions match your actual clustering columns — this script assumes the `Party` and `Number` columns are the first two columns and cluster columns follow.
+
+These lines rename the third through sixth column names to readable labels used as radar axes later. Make sure the positions match your actual clustering columns — this script assumes the `Party` and `Number` columns are the first two columns and cluster columns follow.
 
 
 ### 6) Preparing the data frame for `radarchart()`
@@ -101,11 +98,11 @@ df_for_radar
 )
 row.names(df_for_radar) <- c("max", "min", ClustersDoc$Party)
 ```
-* `select(-Party, -Number)` removes the meta columns so only numeric columns (topic scores) remain.
+`select(-Party, -Number)` removes the meta columns so only numeric columns (topic scores) remain.
 
-* The `radarchart()` function from `fmsb` expects the first two rows of the data frame to be the maximum and minimum values for each axis. Therefore, the script prepends a `max` row and a `min` row using `apply(..., max)` and `apply(..., min)` across columns.
+The `radarchart()` function from `fmsb` expects the first two rows of the data frame to be the maximum and minimum values for each axis. Therefore, the script prepends a `max` row and a `min` row using `apply(..., max)` and `apply(..., min)` across columns.
 
-* Finally, `row.names()` assigns row names: the first two names are `"max"` and `"min"` and then each subsequent row is named after the `Party` value corresponding to that document.
+Finally, `row.names()` assigns row names: the first two names are `"max"` and `"min"` and then each subsequent row is named after the `Party` value corresponding to that document.
 
 ### 7) Color mapping
 ```r
@@ -124,8 +121,7 @@ colors <- c(
 "PSTU" = "#2ca02c" # Forest green
 )
 ```
-* This is a named character vector mapping party abbreviations to hexadecimal color codes. The script later indexes this vector with `ClustersDoc$Party` so each party gets a consistent color for the polygon stroke (`pcol`) and filling (`pfcol`).
-* If your `ClustersDoc$Party` contains abbreviations not present here, indexing will produce `NA` colors and `radarchart()` will likely produce warnings or use defaults.
+This is a named character vector mapping party abbreviations to hexadecimal color codes. The script later indexes this vector with `ClustersDoc$Party` so each party gets a consistent color for the polygon stroke (`pcol`) and filling (`pfcol`).
 
 ### 8) Plotting the radar chart
 
