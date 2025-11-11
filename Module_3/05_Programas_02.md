@@ -5,9 +5,7 @@
 
 ## Objective
 
-The objective of this script (kept exactly as in the code) is to demonstrate how each party performa in the topics we just discussed.
-
-This document explains every block of the R code provided, line-by-line, so you can publish the markdown on GitHub as an instructional `apostila` (tutorial). **I did not change a single line of the code you provided; the original script is included below.**
+The objective of this script is to demonstrate how each party performa in the topics we just discussed.
 
 
 ## Packages
