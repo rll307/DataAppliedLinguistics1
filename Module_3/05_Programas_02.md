@@ -1,11 +1,8 @@
 # Radar chart: Visualizing cluster performance by party
 
-
-***
-
 ## Objective
 
-The objective of this script is to demonstrate how each party performa in the topics we just discussed.
+The objective of this script is to demonstrate how each party performs in the topics we just discussed.
 
 
 ## Packages
